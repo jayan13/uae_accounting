@@ -232,6 +232,8 @@ fixtures = [
 		( 
 			"UAE VAT201",
 			"Trial Balance for Auditor",
+			"Balance Sheet for Auditor",
+			"Profit and Loss Statement for Auditor",
 		)
 		
 	] ] }

@@ -384,7 +384,7 @@ def prepare_data(accounts, filters, parent_children_map, company_currency):
 			"account": d.name,
 			"parent_account": d.parent_account,
 			"is_group":d.is_group,
-			"indent": d.indent,
+			"indent": 0 if d.is_group else 1,
 			"from_date": filters.from_date,
 			"to_date": filters.to_date,
 			"currency": company_currency,
