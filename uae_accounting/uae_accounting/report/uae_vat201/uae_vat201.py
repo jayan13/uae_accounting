@@ -84,7 +84,7 @@ def append_vat_on_sales(data, filters):
 		frappe.format((-1) * tourist_tax_return_total, "Currency"),
 		frappe.format((-1) * tourist_tax_return_tax, "Currency"),
 	)
-
+	"""
 	append_data(
 		data,
 		"3-a",
@@ -92,11 +92,11 @@ def append_vat_on_sales(data, filters):
 		frappe.format(reverse_charge_total, "Currency"),
 		frappe.format(reverse_charge_tax, "Currency"),
 	)
-
+	"""
 	append_data(
 		data,
-		"3-b",
-		_("Supplies subject to the reverse charge provision Services"),
+		"3",
+		_("Supplies subject to the reverse charge provision"),
 		frappe.format(reverse_charge_total_s, "Currency"),
 		frappe.format(reverse_charge_tax_s, "Currency"),
 	)
@@ -108,7 +108,14 @@ def append_vat_on_sales(data, filters):
 	append_data(
 		data, "5", _("Exempt Supplies"), frappe.format(exempt_total, "Currency"), "-"
 	)
-
+	append_data(
+		data,
+		"6",
+		_("Import VAT accounted through UAE customs"),
+		frappe.format(reverse_charge_total, "Currency"),
+		frappe.format(reverse_charge_tax, "Currency"),
+	)
+	append_data(data, "7", _("Adjustments for import figures"), "", "")
 	append_data(data, "8", _("<b>Total</b>"), frappe.format(amt, "Currency"), frappe.format(vat, "Currency"))
 	append_data(data, "", "", "", "")
 
@@ -188,11 +195,12 @@ def append_vat_on_expenses(data, filters):
 	)
 	append_data(
 		data,
-		"10-a",
-		_("Supplies subject to the reverse charge provision Goods"),
-		frappe.format(reverse_charge_recoverable_total, "Currency"),
-		frappe.format(reverse_charge_recoverable_tax, "Currency"),
+		"10",
+		_("Supplies subject to the reverse charge provision"),
+		frappe.format(reverse_charge_recoverable_total+reverse_charge_recoverable_total_s, "Currency"),
+		frappe.format(reverse_charge_recoverable_tax+reverse_charge_recoverable_tax_s, "Currency"),
 	)
+	"""
 	append_data(
 		data,
 		"10-b",
@@ -200,6 +208,7 @@ def append_vat_on_expenses(data, filters):
 		frappe.format(reverse_charge_recoverable_total_s, "Currency"),
 		frappe.format(reverse_charge_recoverable_tax_s, "Currency"),
 	)
+	"""
 	append_data(data, "11", _("<b>Total</b>"), frappe.format(amt, "Currency"), frappe.format(vat, "Currency"))
 	append_data(data, "", "", "", "")
 	append_data(data, "",  _("<b>Net VAT Due</b>"), "", "")
