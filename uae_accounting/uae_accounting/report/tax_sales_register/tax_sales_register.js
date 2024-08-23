@@ -100,7 +100,7 @@ function get_ac_options() {
 	//console.log('c='+company)
 	//{"value":"110100 - Bank - GG","description":"110100"},
 	frappe.call({
-		method: "erpnext.accounts.report.tax_sales_register.tax_sales_register.uae_acc_list",
+		method: "uae_accounting.uae_accounting.report.tax_sales_register.tax_sales_register.uae_acc_list",
 		args: {
 			company: ''
 		},
@@ -120,7 +120,7 @@ function get_temp_options() {
 	//console.log('c='+company)
 	//{"value":"110100 - Bank - GG","description":"110100"},
 	frappe.call({
-		method: "erpnext.accounts.report.tax_sales_register.tax_sales_register.vat_temp_list",
+		method: "uae_accounting.uae_accounting.report.tax_sales_register.tax_sales_register.vat_temp_list",
 		args: {
 			company: ''
 		},
