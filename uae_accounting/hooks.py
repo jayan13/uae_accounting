@@ -234,6 +234,11 @@ fixtures = [
 			"Trial Balance for Auditor",
 			"Balance Sheet for Auditor",
 			"Profit and Loss Statement for Auditor",
+			"Purchase Register Inventory",
+			"Tax Purchase Register",
+			"Tax Sales Register",
+			"Customer Wise Profit and Loss Statement",
+			"Project Wise Profit and Loss Statement",
 		)
 		
 	] ] }
