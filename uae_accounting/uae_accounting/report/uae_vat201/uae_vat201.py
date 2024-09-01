@@ -292,7 +292,7 @@ def get_reverse_charge_tax(filters):
 	return (
 		frappe.db.sql(
 			"""
-		select sum(debit)  from
+		select sum(debit*if(p.is_return,-1,1))  from
 			`tabPurchase Invoice` p inner join `tabGL Entry` gl
 		on
 			gl.voucher_no =  p.name
@@ -316,7 +316,7 @@ def get_reverse_charge_service_tax(filters):
 	return (
 		frappe.db.sql(
 			"""
-		select sum(debit)  from
+		select sum(debit*if(p.is_return,-1,1))  from
 			`tabPurchase Invoice` p inner join `tabGL Entry` gl
 		on
 			gl.voucher_no =  p.name
@@ -374,7 +374,7 @@ def get_reverse_charge_recoverable_tax(filters):
 		frappe.db.sql(
 			"""
 		select
-			sum(debit * p.recoverable_reverse_charge / 100)
+			sum((debit*if(p.is_return,-1,1)) * p.recoverable_reverse_charge / 100)
 		from
 			`tabPurchase Invoice` p  inner join `tabGL Entry` gl
 		on
@@ -401,7 +401,7 @@ def get_reverse_charge_recoverable_service_tax(filters):
 		frappe.db.sql(
 			"""
 		select
-			sum(debit * p.recoverable_reverse_charge / 100)
+			sum((debit*if(p.is_return,-1,1)) * p.recoverable_reverse_charge / 100)
 		from
 			`tabPurchase Invoice` p  inner join `tabGL Entry` gl
 		on
