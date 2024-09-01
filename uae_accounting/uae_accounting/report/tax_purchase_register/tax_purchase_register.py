@@ -579,7 +579,7 @@ def get_invoices(filters, additional_query_columns):
 		if filters.get("is_return")=='Purchase Return':
 			cond+=" and pi.is_return=1 "
 		if filters.get("is_return")=='Purchase Invoice':
-			cond+=" and pi.is_return=1 "
+			cond+=" and pi.is_return=0 "
 
 	if filters.get("rcm"):
 		if filters.get("rcm")!='All':
@@ -623,9 +623,9 @@ def get_conditions(filters, query, doctype):
 		query = query.where(parent_doc.mode_of_payment == filters.mode_of_payment)
 
 	if filters.get("is_return"):
-		if filters.get("is_return")=='Sales Return':
+		if filters.get("is_return")=='Purchase Return':
 			query = query.where(parent_doc.is_return == 1)
-		if filters.get("is_return")=='Sales Invoice':
+		if filters.get("is_return")=='Purchase Invoice':
 			query = query.where(parent_doc.is_return == 0)
 
 	if filters.get("rcm"):
