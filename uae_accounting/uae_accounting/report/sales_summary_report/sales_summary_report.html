@@ -1,0 +1,53 @@
+<div>
+    <h2>Sales Summary Report</h2>
+<p>Date: From {%= frappe.datetime.str_to_user(filters.from_date) %} To {%= frappe.datetime.str_to_user(filters.to_date) %}</p>
+
+    <table class="table table-bordered" style="width: 100%; border-collapse: collapse;">
+        <!-- Group Headings -->
+        <thead>
+            <tr>
+
+                <th colspan="6" style="text-align: center; background-color: #f8f9fa;border: 1px solid #d1d8dd;">Sales</th>
+                <th colspan="7" style="text-align: center; background-color: #f8f9fa;border: 1px solid #d1d8dd;">Receipts</th>
+            </tr>
+            <!-- Actual column headers -->
+            <tr>
+            <th style="text-align: center;border: 1px solid #d1d8dd;padding: 1px !important;">Date</th>
+                <th style="text-align: center;border: 1px solid #d1d8dd;padding: 1px !important;">Cost</th>
+                <th style="text-align: center;border: 1px solid #d1d8dd;padding: 1px !important;">Sales Amount</th>
+                <th style="text-align: center;border: 1px solid #d1d8dd;padding: 1px !important;">Shipping</th>
+                <th style="text-align: center;border: 1px solid #d1d8dd;padding: 1px !important;">Total</th>
+                <th style="text-align: center;border: 1px solid #d1d8dd;padding: 1px !important;">Tax</th>
+                <th style="text-align: center;border: 1px solid #d1d8dd;padding: 1px !important;">Net Total</th>
+
+                <th style="text-align: center;border: 1px solid #d1d8dd;padding: 1px !important;">Cash</th>
+                <th style="text-align: center;border: 1px solid #d1d8dd;padding: 1px !important;">Credit Card</th>
+                <th style="text-align: center;border: 1px solid #d1d8dd;padding: 1px !important;">Stripe</th>
+                <th style="text-align: center;border: 1px solid #d1d8dd;padding: 1px !important;">Bank</th>
+                <th style="text-align: center;border: 1px solid #d1d8dd;padding: 1px !important;">Others</th>
+                <th style="text-align: center;border: 1px solid #d1d8dd;padding: 1px !important;">Receipt Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for(var i=0, l=data.length; i<l; i++) { %}
+
+            <tr>
+                <td style="text-align: center;border: 1px solid #d1d8dd;padding: 1px !important;">{%= data[i].posting_date  %}</td>
+      <td style="text-align: right;border: 1px solid #d1d8dd;padding: 1px !important;">{%= format_currency(data[i].cost, 'AED') %}</td>
+      <td style="text-align: right;border: 1px solid #d1d8dd;padding: 1px !important;">{%= format_currency(data[i].sales_amount, 'AED') %}</td>
+        <td style="text-align: right;border: 1px solid #d1d8dd;padding: 1px !important;">{%= format_currency(data[i].shipping_charge, 'AED') %}</td>
+        <td style="text-align: right;border: 1px solid #d1d8dd;padding: 1px !important;">{%= format_currency(data[i].net_amount, 'AED') %}</td>
+        <td style="text-align: right;border: 1px solid #d1d8dd;padding: 1px !important;">{%= format_currency(data[i].tax_amount, 'AED') %}</td>
+        <td style="text-align: right;border: 1px solid #d1d8dd;padding: 1px !important;">{%= format_currency(data[i].total_amount, 'AED') %}</td>
+        <td style="text-align: right;border: 1px solid #d1d8dd;padding: 1px !important;">{%= format_currency(data[i].cash_payment, 'AED') %}</td>
+        <td style="text-align: right;border: 1px solid #d1d8dd;padding: 1px !important;">{%= format_currency(data[i].credit_card, 'AED') %}</td>
+        <td style="text-align: right;border: 1px solid #d1d8dd;padding: 1px !important;">{%= format_currency(data[i].stripe, 'AED') %}</td>
+        <td style="text-align: right;border: 1px solid #d1d8dd;padding: 1px !important;">{%= format_currency(data[i].bank, 'AED') %}</td>
+        <td style="text-align: right;border: 1px solid #d1d8dd;padding: 1px !important;">{%= format_currency(data[i].others, 'AED') %}</td>
+        <td style="text-align: right;border: 1px solid #d1d8dd;padding: 1px !important;">{%= format_currency(data[i].total, 'AED') %}</td>
+    </tr>
+    {% } %}
+</tbody>
+</table>
+</div>
