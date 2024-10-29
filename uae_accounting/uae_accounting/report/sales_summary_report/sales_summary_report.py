@@ -98,7 +98,7 @@ def get_sales_data(filters):
     SELECT 
         si.posting_date,
         SUM(si.base_net_total) AS sales_amount,
-        SUM((select sum(c.qty * if(c.incoming_rate,c.incoming_rate,0)) from `tabSales Invoice Item` c where c.item_code <> 'Shipping Charges' and c.parent=si.name group by c.parent)) as cost, >
+        SUM((select sum(c.qty * if(c.incoming_rate,c.incoming_rate,0)) from `tabSales Invoice Item` c where c.item_code <> 'Shipping Charges' and c.parent=si.name group by c.parent)) as cost,
         SUM((SELECT stc.base_tax_amount
             FROM `tabSales Taxes and Charges` stc 
             WHERE stc.parent = si.name
@@ -191,13 +191,13 @@ def get_payment_data(filters):
             SUM(CASE 
                 WHEN pe.payment_type = 'Receive' 
                     AND pe.party_type='Customer'
-                    AND pe.paid_to NOT IN ('110201 - Cash on hand - Cash Sales - GPEX', '110208 - Petty Cash - Office - GPEX', '110104 - Network Solutions Card Sales  (AED) - GPEX', '110106 - STRI>
+                    AND pe.paid_to NOT IN ('110201 - Cash on hand - Cash Sales - GPEX', '110208 - Petty Cash - Office - GPEX', '110104 - Network Solutions Card Sales  (AED) - GPEX', '110106 - STRIPE Payment Gateway - GPEX', '110101 - First Abu Dhabi  Bank - AED - GPEX')
                 THEN pe.base_paid_amount
                 ELSE 0 END) -
             SUM(CASE 
                 WHEN pe.payment_type = 'Pay' 
                     AND pe.party_type='Customer'
-                    AND pe.paid_from NOT IN ('110201 - Cash on hand - Cash Sales - GPEX', '110208 - Petty Cash - Office - GPEX', '110104 - Network Solutions Card Sales  (AED) - GPEX', '110106 - ST>
+                    AND pe.paid_from NOT IN ('110201 - Cash on hand - Cash Sales - GPEX', '110208 - Petty Cash - Office - GPEX', '110104 - Network Solutions Card Sales  (AED) - GPEX', '110106 - STRIPE Payment Gateway - GPEX', '110101 - First Abu Dhabi  Bank - AED - GPEX')
                 THEN pe.base_paid_amount
                 ELSE 0 END) AS others
         FROM 
